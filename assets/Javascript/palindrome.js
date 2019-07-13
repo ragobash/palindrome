@@ -1,29 +1,22 @@
-isPalindrome = (string) => {
-    string = string.toLocaleLowerCase();
-    return Array.from(string).toString() === Array.from(string).reverse().toString()
-}
+$(document).ready(function() {
 
-isPalindrome = (string) => {
-    let strLen = string.length;
-    string = string.toLocaleLowerCase();
+    $("#check-btn").on("click", checkWord);
 
-    if (strLen === 0 || strLen === 1) {
-        return true;
-    }
-    if (string[0] === string[strLen - 1]) {
-        return isPalindrome(string.slice(1, strLen - 1));
-    }
-    return false;
-};
+    function checkWord() {
+        var word = $("#inputWord");
+        var result = $("#result");
 
-isPalindrome = (string) => {
-    let strLen = Math.floor(string.length / 2);
-    string = string.toLocaleLowerCase();
-
-    for (let i = 0; i < strLen; i++) {
-        if (string[i] !== string[strLen - i - 1]) {
-            return false;
+        if(isPalindrome(word.val())) {
+            result.text("Palindrome!")
+        } else {
+            result.text("Not a Palindrome!");
         }
+
+        word.val("");
     }
-    return true;
-}
+
+    function isPalindrome(string) {
+        string = string.toLocaleLowerCase().replace(/\s/g, '');
+        return Array.from(string).toString() === Array.from(string).reverse().toString();
+    }
+});
